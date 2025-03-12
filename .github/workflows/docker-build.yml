@@ -22,7 +22,7 @@ jobs:
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/app:dev .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/react-simple:dev
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/app:dev
 
   staging:
     if: github.ref == 'refs/heads/staging'
@@ -38,7 +38,7 @@ jobs:
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/app:staging .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/react-simple:staging
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/app:staging
 
   production:
     if: github.ref == 'refs/heads/main'
@@ -54,4 +54,4 @@ jobs:
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/app:latest .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/react-simple:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/app:latest
