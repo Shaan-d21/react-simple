@@ -2,15 +2,13 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches:
-      - dev
-      - staging
-      - main
+    branches: ["main", "dev", "staging"]
 
 jobs:
   dev:
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,14 +17,15 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/app:dev .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/react-simple:dev .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/app:dev
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/react-simple:dev
 
   staging:
     if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,14 +34,15 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/app:staging .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/react-simple:staging .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/app:staging
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/react-simple:staging
 
   production:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -51,7 +51,7 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/app:latest .
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/react-simple:latest .
 
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/app:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/react-simple:latest
