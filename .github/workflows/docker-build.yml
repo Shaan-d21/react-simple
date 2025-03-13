@@ -2,15 +2,13 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches:
-      - dev
-      - staging
-      - main
+    branches: ["main", "dev", "staging"]
 
 jobs:
   dev:
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,6 +25,7 @@ jobs:
   staging:
     if: github.ref == 'refs/heads/staging'
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -43,6 +42,7 @@ jobs:
   production:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
