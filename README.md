@@ -1,25 +1,37 @@
-<h1 align="center">Todo React App  📝</h1>  
-<p align="center">
-  🖊️ A simple Todo App built using <a href="https://reactjs.org/">React</a> and <a href="https://mantine.dev/">Mantine UI</a>
-</p>
+# Assignment 2: GitHub Actions Workflow for Docker Image 
 
-## This is a super simple Todo App built using React.js and styled using Mantine UI.
+This repository contains a **GitHub Actions workflow** that automates building and pushing Docker images to Docker Hub for different environments: **development, staging, and production**.
 
-You can view a live demo of the project here: https://javascriptbear.github.io/todo_react_app/
-Or, you can watch this video demo
+---
 
-### **(Most likely outdated, its reccomeneded you check out the live demo!)**
+## Features  
+✅ Automates Docker image builds for **dev, staging, and production** environments.  
+✅ Tags Docker images appropriately (`dev`, `staging`, `latest`).  
+✅ Pushes images to **Docker Hub** securely.  
+✅ Triggers workflow **only on relevant branch updates**.  
+✅ Uses **GitHub Secrets** for security.  
 
-https://user-images.githubusercontent.com/109053279/178185429-8de77574-cc2f-429f-8c4e-b1ed9f290894.mp4
+## Set Up GitHub Secrets
+Before running the workflow, add the following secrets in GitHub → Settings → Secrets and variables → Actions:
 
-## 😃 Features:
+### Secret Name	Description
+**`DOCKERHUB_USERNAME`	Your Docker Hub username**
+**`DOCKERHUB_TOKEN`	Your Docker Hub access token**
 
-- ➕ Add todos
-- 🗑️ Delete todos
-- ⏸ Save todos to Local Storage when the state changes
-- ▶️ Load the todos from Local Storage when the site is loaded again
-- 🌙 Light \ dark mode toggle
+Go to Docker Hub.
+Navigate to Account Settings → Security.
+Create a New Access Token and copy it.
+Store it in GitHub Secrets as DOCKERHUB_TOKEN.
 
-<p align="center">
-  ❤️ Feel free to create issues and contributions for features or bugs to this project.
-</p>
+1) Push Code to Relevant Branch
+Commit and push your changes to trigger the workflow:
+
+`git add .`
+`git commit -m "Implemented GitHub Actions workflow"`
+`git push origin dev  # or staging/main`
+
+2) Monitor Workflow Execution
+Go to GitHub → Your Repository → Actions to check the workflow status.
+
+3) Verify Docker Image on Docker Hub
+Log in to Docker Hub and confirm the image was successfully pushed.
